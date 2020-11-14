@@ -20,9 +20,9 @@ public class CountDuplicates {
         int duplicates = 0;
         String currentValue = null;
         for (int i = 0; i < input.length; i++) {
-            int nextIndex = i + 1;
-            if (indexInRange(input, nextIndex)) {
-                if (!input[i].equals(currentValue) && input[i].equals(input[nextIndex])) {
+            if (indexInRange(input, i + 1)) {
+                String nextStr = input[i + 1];
+                if (!input[i].equals(currentValue) && input[i].equals(nextStr)) {
                     duplicates++;
                     currentValue = input[i];
                 }
@@ -43,9 +43,9 @@ public class CountDuplicates {
         int duplicates = 0;
         Integer currentValue = null;
         for (int i = 0; i < input.length; i++) {
-            int nextIndex = i + 1;
-            if (indexInRange(input, nextIndex)) {
-                if (!input[i].equals(currentValue) && input[i].equals(input[nextIndex])) {
+            if (indexInRange(input, i + 1)) {
+                int nextInt = input[i + 1];
+                if (!input[i].equals(currentValue) && input[i].equals(nextInt)) {
                     duplicates++;
                     currentValue = input[i];
                 }
