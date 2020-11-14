@@ -1,22 +1,31 @@
 package hbcu.stay.ready.algorithms;
 
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class HashMapImplementation {
-    public Integer countDuplicates(String[] input){
-        Arrays.sort(input);
 
-        int duplicates = 0;
-        String currentValue = null;
+    public Integer countDuplicates(String[] input){
+
+        HashMap<String, Integer> hashMap = new HashMap<>();
         for (int i = 0; i < input.length; i++) {
-            if (indexInRange(input, i + 1)) {
-                String nextStr = input[i + 1];
-                if (!input[i].equals(currentValue) && input[i].equals(nextStr)) {
-                    duplicates++;
-                    currentValue = input[i];
-                }
+            String value = input[i];
+            if (hashMap.containsKey(value)) {
+                int timesInHashMap = hashMap.get(value);
+                timesInHashMap++;
+                hashMap.put(value, timesInHashMap);
+            } else {
+                hashMap.put(value, 1);
             }
         }
+
+        int duplicates = 0;
+        for (String s1 : hashMap.keySet()) {
+            if (hashMap.get(s1) > 1) {
+                duplicates++;
+            }
+        }
+
         return duplicates;
     }
 
@@ -29,16 +38,16 @@ public class HashMapImplementation {
         Arrays.sort(input);
 
         int duplicates = 0;
-        Integer currentValue = null;
-        for (int i = 0; i < input.length; i++) {
-            if (indexInRange(input, i + 1)) {
-                int nextInt = input[i + 1];
-                if (!input[i].equals(currentValue) && input[i].equals(nextInt)) {
-                    duplicates++;
-                    currentValue = input[i];
-                }
-            }
-        }
+//        Integer currentValue = null;
+//        for (int i = 0; i < input.length; i++) {
+//            if (indexInRange(input, i + 1)) {
+//                int nextInt = input[i + 1];
+//                if (!input[i].equals(currentValue) && input[i].equals(nextInt)) {
+//                    duplicates++;
+//                    currentValue = input[i];
+//                }
+//            }
+//        }
         return duplicates;
     }
 
