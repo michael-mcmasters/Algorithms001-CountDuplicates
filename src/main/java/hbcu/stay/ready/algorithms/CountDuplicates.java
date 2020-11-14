@@ -1,6 +1,9 @@
 package hbcu.stay.ready.algorithms;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.Objects;
+import java.util.stream.Stream;
 
 public class CountDuplicates {
     /**
@@ -9,7 +12,24 @@ public class CountDuplicates {
      * @return
      */
     public Integer countDuplicates(String[] input){
-        return null;
+        //Arrays.asList(input).forEach(System.out::println);
+        //int[] myIntArray = Arrays.stream(input).mapToInt(Integer::parseInt).toArray();
+
+        Arrays.sort(input);
+
+        int duplicates = 0;
+        String currentValue = null;
+        for (int i = 0; i < input.length; i++) {
+            int nextIndex = i + 1;
+            if (indexInRange(input, nextIndex)) {
+                if (!input[i].equals(currentValue) && input[i].equals(input[nextIndex])) {
+                    duplicates++;
+                    currentValue = input[i];
+                }
+            }
+        }
+
+        return duplicates;
     }
 
     /**
@@ -23,11 +43,23 @@ public class CountDuplicates {
         int duplicates = 0;
         Integer currentValue = null;
         for (int i = 0; i < input.length; i++) {
-            if (!input[i].equals(currentValue) && input[i].equals(input[i + 1])) {
-                duplicates++;
-                currentValue = input[i];
+            int nextIndex = i + 1;
+            if (indexInRange(input, nextIndex)) {
+                if (!input[i].equals(currentValue) && input[i].equals(input[nextIndex])) {
+                    duplicates++;
+                    currentValue = input[i];
+                }
             }
         }
         return duplicates;
+    }
+
+    // Use generic array so that String[] and Integer[] can both call this method.
+    // (I'm now realizing it would be simpler to just pass the length of the array as a parameter but I don't get to work with generics much so here it stays.)
+    private <T> boolean indexInRange(T[] array, int index) {
+        if (index > array.length - 1) {
+            return false;
+        }
+        return true;
     }
 }
