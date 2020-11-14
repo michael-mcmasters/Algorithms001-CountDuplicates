@@ -2,12 +2,7 @@ package hbcu.stay.ready.algorithms;
 
 import java.util.Arrays;
 
-public class CountDuplicates {
-    /**
-     * Example of overloading a function that accepts a Array String
-     * @param input
-     * @return
-     */
+public class HashMapImplementation {
     public Integer countDuplicates(String[] input){
         Arrays.sort(input);
 
