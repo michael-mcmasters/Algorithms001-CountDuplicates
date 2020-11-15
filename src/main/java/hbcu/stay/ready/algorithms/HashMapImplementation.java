@@ -1,7 +1,6 @@
 package hbcu.stay.ready.algorithms;
 
-import java.util.Arrays;
-import java.util.HashMap;
+import java.util.*;
 
 public class HashMapImplementation {
 
@@ -35,19 +34,24 @@ public class HashMapImplementation {
      * @return
      */
     public Integer countDuplicates(Integer[] input){
-        Arrays.sort(input);
+        // First <Integer> for the input index, second <Integer> for the times it was detected in the loop.
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < input.length; i++) {
+            if (map.containsKey(input[i])) {
+                int timesInMap = map.get(input[i]);
+                timesInMap++;
+                map.put(input[i], timesInMap);
+            } else {
+                map.put(input[i], 1);
+            }
+        }
 
         int duplicates = 0;
-//        Integer currentValue = null;
-//        for (int i = 0; i < input.length; i++) {
-//            if (indexInRange(input, i + 1)) {
-//                int nextInt = input[i + 1];
-//                if (!input[i].equals(currentValue) && input[i].equals(nextInt)) {
-//                    duplicates++;
-//                    currentValue = input[i];
-//                }
-//            }
-//        }
+        for (Integer key : map.keySet()) {
+            if (map.get(key) > 1) {
+                duplicates++;
+            }
+        }
         return duplicates;
     }
 
